@@ -1,7 +1,9 @@
 const board = new Board();
-const laserRed = new Laser();
-const laserGreen = new Laser();
-const goal  = new Goal();
-const control = new Control();
-const playerRed = new Player();
-const playerGreen = new Player();
+const laserRed = new Laser(200, 400, 'red', 300, 100);
+const laserGreen = new Laser(500, 400, 'green', 100, 300);
+const goalRed  = new Goal(600, 400, 'red');
+const goalGreen = new Goal(300, 300, 'green');
+const controlRed = new Control(400, 500, 'red');
+const controlGreen = new Control(200, 100, 'green');
+const playerRed = new Player(600, 600, 'red');
+const playerGreen = new Player(0, 600, 'green');

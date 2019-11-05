@@ -13,22 +13,31 @@ class Board {
 }
 
 class Laser {
-    constructor() {
+    constructor(x, y, color, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
         this.imgRed = new Image();
         this.imgRed.src = images.laserR;
         this.imgGreen = new Image();
         this.imgGreen.src = images.laserG;
     }
-    drawRed(){
-        ctx.drawImage(this.imgRed, 200, 400, 300, 100);
-    }
-    drawGreen(){
-        ctx.drawImage(this.imgGreen, 500, 400, 100, 300);
+    draw(){
+        if(this.color === 'red') {
+            ctx.drawImage(this.imgRed, this.x, this.y, this.width, this.height);
+        } else if (this.color === 'green') {
+            ctx.drawImage(this.imgGreen, this.x, this.y, this.width, this.height);
+        }
     }
 }
 
 class Goal {
-    constructor() {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
         this.width = 100;
         this.height = 100;
         this.imgRed = new Image();
@@ -36,16 +45,20 @@ class Goal {
         this.imgGreen = new Image();
         this.imgGreen.src = images.goalG;
     }
-    drawRed(){
-        ctx.drawImage(this.imgRed, 600, 400, this.width, this.height);
-    }
-    drawGreen(){
-        ctx.drawImage(this.imgGreen, 300, 300, this.width, this.height);
+    draw() {
+        if(this.color === 'red') {
+            ctx.drawImage(this.imgRed, this.x, this.y, this.width, this.height);
+        } else if(this.color === 'green') {
+            ctx.drawImage(this.imgGreen, this.x, this.y, this.width, this.height);
+        }
     }
 }
 
 class Control {
-    constructor() {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
         this.width = 100;
         this.height = 100;
         this.imgRed = new Image();
@@ -53,83 +66,122 @@ class Control {
         this.imgGreen = new Image();
         this.imgGreen.src = images.controlG;
     }
-    drawRed(){
-        ctx.drawImage(this.imgRed, 400, 500, this.width, this.height);
-    }
-    drawGreen(){
-        ctx.drawImage(this.imgGreen, 200, 100, this.width, this.height);
+    draw(){
+        if(this.color === 'red'){
+            ctx.drawImage(this.imgRed, this.x, this.y, this.width, this.height);
+        } else if (this.color === 'green') {
+            ctx.drawImage(this.imgGreen, this.x, this.y, this.width, this.height);
+        }
     }
 }
 
 
 class Player {
-    constructor(){
+    constructor(x, y, color){
+        this.x = x;
+        this.y = y;
+        this.color = color;
         this.width = 100;
         this.height = 100;
-        this.x = 600;
-        this.y = 600;
-        // this.xGreen = 0;
-        // this.yGreen = 600;
         this.vx = 0;
         this.vy = 0;
+        this.side = '';
         this.position = 0;
         this.imgRed = new Image();
         this.imgRed.src = images.playerR;
         this.imgGreen = new Image();
         this.imgGreen.src = images.playerG;
     }
-    drawRed(){
-        //X
+    draw(){
+         //X
         if (this.x > canvas.width - this.width) {
             this.x = canvas.width - this.width
-          } else if (this.x <= 0){
+        } else if (this.x <= 0){
             this.x = 0;  
-          }
+        }
+        
         //Y
         if (this.y > canvas.height - this.height) {
             this.y = canvas.height - this.height;
         } else if (this.y <= 0) {
             this.y = 0;
+        }
+        if(this.color === 'red') {
+            ctx.drawImage(this.imgRed, this.x, this.y, this.width, this.height);
+        } else if(this.color === 'green') {
+            ctx.drawImage(this.imgGreen, this.x, this.y, this.width, this.height);
+        }
+    }
+    moveLeft(obstacle){
+        if(this.x == obstacle.x + 100 && this.y >= obstacle.y){
+            console.log('aqui menos')
+        }else {
+            this.x -=100
+        }
+        
+    }
+    moveRight(obstacle){
+        if(this.x == obstacle.x - 100 && this.y >= obstacle.y){
+            console.log('aqui no mayfriend')
+        } else {
+            this.x += 100;
+        }
+        
+    }
+    moveUp(obstacle){
+        if(this.y == obstacle.y && this.x == obstacle.x){
+           console.log('nel')
+        } else{
+            this.y -= 100;
+        }
+        
+    }
+    moveDown(obstacle){    
+        if(this.y == obstacle.y - 100 && this.x ==obstacle.x){
+            console.log('nel')
+        } else {
+            this.y += 100;
+        }
+        
+    }
+    isTouching(obstacle) {
+        // if (this.x === obstacle.x + obstacle.width && this.y >= obstacle.y ) {
+        //     return this.side = 'right';
+        // }
+        // if (this.x === obstacle.x && this.y >= obstacle.y ) {
+        //     return this.side = 'left';
+        // }
+        // else if (this.x == obstacle.x && this.y > obstacle.y) {
+        //     this.side = 'left'
+        // }
+
+        //ESTE SIRVE 
+        if(this.x == obstacle.x && this.y >= obstacle.y){
+            return this.side = 'left';
+        }
+         else if(this.x == obstacle.x && this.y >= obstacle.y) {
+            return this.side = 'right';
         }
 
-        ctx.drawImage(this.imgRed, this.x, this.y, this.width, this.height);
+        // this.x < obstacle.x + obstacle.width && 
+        //     this.y  > obstacle.height
+
+
+        // return (
+        //     this.x < obstacle.x + obstacle.width &&
+        //     this.x + this.width > obstacle.x && 
+        //     this.y < obstacle.y + obstacle.height &&
+        //     this.y + this.height > obstacle.y
+        // )
     }
-    
-    drawGreen(){
-        //X
-        if (this.x > canvas.width - this.width) {
-            this.x = canvas.width - this.width
-          } else if (this.x <= 0){
-            this.x = 0;  
-          }
-        //Y
-        if (this.y > canvas.height - this.height) {
-            this.y = canvas.height - this.height;
-        } else if (this.y <= 0) {
-            this.y = 0;
+    isGoal(goal){
+        if(this.x === goal.x && this.y === goal.y){
+            return true;
         }
-        ctx.drawImage(this.imgGreen, this.x, this.y, this.width, this.height);
     }
-    
-    moveLeft(){
-        this.x -= 100;
-    }
-    moveRight(){
-        this.x += 100;
-    }
-    moveUp(){
-        this.y -= 100;
-    }
-    moveDown(){
-        this.y += 100;
-    }
-    
-    isTouching(obstacle) {
-        return (
-            this.x < obstacle.x + obstacle.width &&
-            this.x + this.width > obstacle.x && 
-            this.y < obstacle.y + obstacle.height &&
-            this.y + this.height > obstacle.y
-        )
+    onControl(control){
+        if(this.x === control.x && this.y === control.y){
+            return true;
+        }
     }
 }

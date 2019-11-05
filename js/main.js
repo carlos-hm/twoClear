@@ -30,28 +30,41 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-function checkCollitions(){
-    if (playerRed.isTouching(laserGreen)) {
-        console.log('touch');
-      }
-}
+// function checkCollitions(){
+//     if (playerRed.isTouching(laserGreen)) {
+//         // if(playerRed.side === 'left') {
+//         //     playerRed.x = playerRed.x + 100;
+//         // } else if(playerRed.side === 'right') {
+//         //     playerRed.x = playerRed.x - 100;
+//         // }
+//     }
+
+//     if(playerGreen.isGoal(goalGreen)){
+//         console.log('green win')
+//     }
+//     if(playerRed.isGoal(goalRed)){
+//         console.log('red win');
+//     }
+//     if(playerGreen.onControl(controlGreen)){
+//         console.log('control green')
+//     }
+//     if(playerRed.onControl(controlRed)){
+//         console.log('control red');
+//     }
+// }
 
 function update() {
     frames++;
     clearCanvas();
     board.draw();
-    laserGreen.drawRed();
-    laserRed.drawGreen();
-    goal.drawRed();
-    goal.drawGreen();
-    control.drawGreen();
-    control.drawRed();
-    playerRed.drawRed();
-    playerRed.xRed;
-    playerRed.yRed;
-    playerGreen.drawGreen();
-    playerGreen.xGreen;
-    playerGreen.yGreen;
-    checkCollitions();
+    laserGreen.draw();
+    laserRed.draw();
+    goalRed.draw();
+    goalGreen.draw();
+    controlRed.draw();
+    controlGreen.draw();
+    playerRed.draw();
+    playerGreen.draw();
+    //checkCollitions();
 }
 
