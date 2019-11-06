@@ -2,6 +2,9 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 let interval;
 let frames  = 0;
+let obstacles = [];
+let deletedGreen = [];
+let redObs = [];
 
 const images = {
     bg: 'img/background.png',
@@ -9,6 +12,7 @@ const images = {
     playerR: 'img/playerR.png',
     laserR: 'img/laserRed.png',
     laserG: 'img/laserGreen.png',
+    blackH: 'img/blackHole.png',
     goalR: 'img/goalRed.png',
     goalG: 'img/goalGreen.png',
     controlR: 'img/controlRed.png',
@@ -53,18 +57,28 @@ function clearCanvas() {
 //     }
 // }
 
+function drawObstacle() {
+    obstacles.forEach(obj => obj.draw());
+}
+
+function check(){
+    obstacles.forEach(obj => obj)
+}
+
 function update() {
     frames++;
     clearCanvas();
     board.draw();
-    laserGreen.draw();
-    laserRed.draw();
+    drawObstacle();
     goalRed.draw();
     goalGreen.draw();
     controlRed.draw();
     controlGreen.draw();
     playerRed.draw();
     playerGreen.draw();
+    playerRed.onControl(controlRed);
+    playerGreen.onControl(controlGreen);
+    
     //checkCollitions();
 }
 

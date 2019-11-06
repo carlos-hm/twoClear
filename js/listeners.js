@@ -2,30 +2,28 @@ document.onkeypress = e => {
     //console.log(e)
     switch (e.keyCode) {
         case 97:
-            playerRed.moveLeft(laserGreen)
-            console.log('aiurraaaa')
+            playerRed.moveLeft(obstacles)
             return
         case 100:
-            playerRed.moveRight(laserGreen)
-            console.log('aiuraaa x2')
+            playerRed.moveRight(obstacles)
             return
         case 119:
-            playerRed.moveUp(laserGreen)
+            playerRed.moveUp(obstacles);
             return
         case 115:
-            playerRed.moveDown(laserGreen)
+            playerRed.moveDown(obstacles);
             return
         case 107:
-            playerGreen.moveLeft(laserRed)
+            playerGreen.moveLeft(obstacles)
             return
         case 241:
-            playerGreen.moveRight(laserRed)
+            playerGreen.moveRight(obstacles)
             return
         case 108:
-            playerGreen.moveDown(laserRed)
+            playerGreen.moveDown(obstacles)
             return
         case 111:
-            playerGreen.moveUp(laserRed)
+            playerGreen.moveUp(obstacles)
             return
         default:
             break

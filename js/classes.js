@@ -12,6 +12,8 @@ class Board {
     }
 }
 
+
+
 class Laser {
     constructor(x, y, color, width, height) {
         this.x = x;
@@ -23,12 +25,16 @@ class Laser {
         this.imgRed.src = images.laserR;
         this.imgGreen = new Image();
         this.imgGreen.src = images.laserG;
+        this.imgBlack = new Image();
+        this.imgBlack.src = images.blackH;
     }
     draw(){
         if(this.color === 'red') {
             ctx.drawImage(this.imgRed, this.x, this.y, this.width, this.height);
         } else if (this.color === 'green') {
             ctx.drawImage(this.imgGreen, this.x, this.y, this.width, this.height);
+        } else if (this.color === 'black'){
+            ctx.drawImage(this.imgBlack, this.x, this.y, this.width, this.height);
         }
     }
 }
@@ -113,33 +119,100 @@ class Player {
         }
     }
     moveLeft(obstacle){
-        if(this.x == obstacle.x + 100 && this.y >= obstacle.y){
-            console.log('aqui menos')
-        }else {
-            this.x -=100
-        }
-        
+        let free = true
+        obstacle.forEach((element) => {
+            if(element.color == 'black') {
+                if(this.x == element.x + 100 && this.y == element.y){
+                    free = false
+                    return console.log('black')
+                }
+            } else if (element.color == 'green' && this.color == 'red') {
+                if(this.x == element.x + 100 && this.y == element.y){
+                    free = false
+                    return console.log('green')
+                }
+            } else if (element.color == 'red' && this.color == 'green') {
+                if(this.x == element.x + 100 && this.y == element.y){
+                    free = false
+                    return console.log('red')
+                }
+            }
+        })   
+        if (free) {
+            this.x -=100     
+        }   
     }
     moveRight(obstacle){
-        if(this.x == obstacle.x - 100 && this.y >= obstacle.y){
-            console.log('aqui no mayfriend')
-        } else {
+        let free = true;
+        obstacle.forEach((element) => {
+            if(element.color == 'black') {
+                if(this.x == element.x - 100 && this.y == element.y){
+                    free = false;
+                    return console.log('black');
+                }
+            } else if (element.color == 'green' && this.color == 'red'){
+                if(this.x == element.x - 100 && this.y == element.y){
+                    free = false;
+                    return console.log('green');
+                }
+            } else if (element.color == 'red' && this.color == 'green') {
+                if(this.x == element.x - 100 && this.y == element.y){
+                    free = false;
+                    return console.log('red');
+                }
+            }
+        })
+        if (free) {
             this.x += 100;
         }
-        
     }
+
     moveUp(obstacle){
-        if(this.y == obstacle.y && this.x == obstacle.x){
-           console.log('nel')
-        } else{
+        let free = true;
+        obstacle.forEach((element) => {
+            if(element.color == 'black') {
+                if(this.y == element.y + 100 && this.x == element.x){
+                    free = false;
+                    return console.log('black')
+                } 
+            } else if (element.color == 'green' && this.color == 'red'){
+                if(this.y == element.y + 100 && this.x == element.x){
+                    free = false;
+                    return console.log('green')
+                } 
+            } else if (element.color == 'red' && this.color == 'green'){
+                if(this.y == element.y + 100 && this.x == element.x){
+                    free = false;
+                    return console.log('red')
+                } 
+            }
+        });
+        if(free) {
             this.y -= 100;
         }
-        
+            
     }
-    moveDown(obstacle){    
-        if(this.y == obstacle.y - 100 && this.x ==obstacle.x){
-            console.log('nel')
-        } else {
+    moveDown(obstacle){
+        let free = true;
+        obstacle.forEach((element) => {
+            if(element.color == 'black'){
+                if(this.y == element.y - 100 && this.x == element.x ){
+                    free = false;
+                    console.log('black')
+                }
+            } else if (element.color == 'green' && this.color == 'red') {
+                if (this.y == element.y - 100 && this.x == element.x ){
+                    free = false;
+                    console.log('green')
+                }
+            } else if (element.color == 'red' && this.color == 'green') {
+                if (this.y == element.y - 100 && this.x == element.x ){
+                    free = false;
+                    console.log('red')
+                }
+            }
+        })
+        if(free) {
             this.y += 100;
         }
         
@@ -179,9 +252,38 @@ class Player {
             return true;
         }
     }
+
+    
+
     onControl(control){
-        if(this.x === control.x && this.y === control.y){
-            return true;
+       
+        if(this.x === control.x && this.y === control.y && this.color == 'green' && control.color == 'green'){
+            obstacles.forEach((element, idx) => {
+                //console.log(element.color)
+                if(element.color === 'green'){
+                    let arr = obstacles.splice(idx, 1)
+                    deletedGreen.push(...arr);
+                }
+            })
+            // deletedGreen.splice(0,1,removed.shift());
+            console.log(deletedGreen);
+        } else {
+            if(deletedGreen.length > 0) {
+                let arr = deletedGreen.splice(0, 1)
+                obstacles.push(...arr);
+                console.log(arr)
+            }
+        }
+        
+        if(this.x === control.x && this.y === control.y && this.color == 'red' && control.color == 'red'){
+            obstacles.forEach((element, idx) => {
+                console.log(element.color)
+                if(element.color === 'red'){
+                    obstacles.splice(idx, 1);
+                    console.log('yes');
+                }
+            })
         }
     }
 }
+
