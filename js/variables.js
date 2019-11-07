@@ -21,6 +21,7 @@ const controlRed = new Control(400, 500, 'red');
 const controlGreen = new Control(200, 100, 'green');
 const playerRed = new Player(600, 600, 'red');
 const playerGreen = new Player(0, 600, 'green');
+const win = new Win();
 
 obstacles.push(laserRed1, laserRed2, laserRed3, laserGreen1, laserGreen2, laserGreen3, blackHole1, blackHole2, blackHole3, blackHole4, blackHole5, blackHole6,blackHole7, blackHole8, blackHole9, blackHole10);
 

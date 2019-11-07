@@ -5,6 +5,7 @@ let frames  = 0;
 let obstacles = [];
 let deletedGreen = [];
 let redObs = [];
+let moves = 0;
 
 const images = {
     bg: 'img/background.png',
@@ -16,13 +17,16 @@ const images = {
     goalR: 'img/goalRed.png',
     goalG: 'img/goalGreen.png',
     controlR: 'img/controlRed.png',
-    controlG: 'img/controlGreen.png'
-
+    controlG: 'img/controlGreen.png',
+    win01: 'img/Win01.png',
+    win02: 'img/Win02.png',
+    win03: 'img/Win03.png',
 }
 
 window.onload = function() {
     document.getElementById("start-button").onclick = function() {
-      startGame();
+        document.querySelector('canvas').style.visibility = 'visible';
+        startGame();
     };
   
     function startGame() {
@@ -34,28 +38,6 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-// function checkCollitions(){
-//     if (playerRed.isTouching(laserGreen)) {
-//         // if(playerRed.side === 'left') {
-//         //     playerRed.x = playerRed.x + 100;
-//         // } else if(playerRed.side === 'right') {
-//         //     playerRed.x = playerRed.x - 100;
-//         // }
-//     }
-
-//     if(playerGreen.isGoal(goalGreen)){
-//         console.log('green win')
-//     }
-//     if(playerRed.isGoal(goalRed)){
-//         console.log('red win');
-//     }
-//     if(playerGreen.onControl(controlGreen)){
-//         console.log('control green')
-//     }
-//     if(playerRed.onControl(controlRed)){
-//         console.log('control red');
-//     }
-// }
 
 function drawObstacle() {
     obstacles.forEach(obj => obj.draw());
@@ -63,6 +45,19 @@ function drawObstacle() {
 
 function check(){
     obstacles.forEach(obj => obj)
+}
+
+function score(){
+    ctx.font = '20px Montserrat'
+    ctx.fillStyle = '#707070'
+    ctx.fillText(`moves: ${moves}`, 670, 50)
+}
+
+function checkWin(){
+    if(playerRed.onGoal(goalRed) && playerGreen.onGoal(goalGreen)){
+        clearInterval(interval);
+        win.draw();
+    }
 }
 
 function update() {
@@ -78,7 +73,10 @@ function update() {
     playerGreen.draw();
     playerRed.onControl(controlRed);
     playerGreen.onControl(controlGreen);
-    
+    //win.draw()
+    score();
+    checkWin();
+    //win.draw();
     //checkCollitions();
 }
 

@@ -12,6 +12,37 @@ class Board {
     }
 }
 
+class Win {
+    constructor(){
+        this.x = 0;
+        this.y = 0;
+        this.starsX = 100;
+        this.starsY = 400;
+        this.starsWidth = 626;
+        this.starsHeight = 185;
+        this.width = 800;
+        this.height = 700;
+        this.imgWin01 = new Image();
+        this.imgWin01.src = images.win01;
+        this.imgWin02 = new Image();
+        this.imgWin02.src = images.win02;
+        this.imgWin03 = new Image();
+        this.imgWin03.src = images.win03;
+    }
+    draw(){  
+        if(moves <= 42){
+            ctx.drawImage(this.imgWin03, this.x, this.y, this.width, this.height);
+        } else if (moves > 42 && moves <= 46){
+            ctx.drawImage(this.imgWin02, this.x, this.y, this.width, this.height);
+        } else if (moves > 46){
+            ctx.drawImage(this.imgWin01, this.x, this.y, this.width, this.height);
+        }
+
+        ctx.font = '50px Montserrat'
+        ctx.fillStyle = '#707070'
+        ctx.fillText(`${moves} moves`, 285, 580)
+    }
+}
 
 
 class Laser {
@@ -139,7 +170,11 @@ class Player {
             }
         })   
         if (free) {
-            this.x -=100     
+            this.x -=100
+            if(this.x >= 0){
+                moves++;
+                console.log(moves);
+            }  
         }   
     }
     moveRight(obstacle){
@@ -164,6 +199,10 @@ class Player {
         })
         if (free) {
             this.x += 100;
+            if(this.x < 800){
+                moves++;
+                console.log(moves);
+            };
         }
     }
 
@@ -189,6 +228,10 @@ class Player {
         });
         if(free) {
             this.y -= 100;
+            if(this.y > 0){
+                moves++;
+                console.log(moves);
+            }   
         }
             
     }
@@ -214,6 +257,10 @@ class Player {
         })
         if(free) {
             this.y += 100;
+            if(this.y < 700){
+                moves++;
+                console.log(moves);
+            }  
         }
         
     }
@@ -247,8 +294,9 @@ class Player {
         //     this.y + this.height > obstacle.y
         // )
     }
-    isGoal(goal){
+    onGoal(goal){
         if(this.x === goal.x && this.y === goal.y){
+            //console.log('sii')
             return true;
         }
     }
