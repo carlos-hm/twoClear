@@ -1,6 +1,9 @@
 document.onkeypress = e => {
-    //console.log(e)
+    console.log(e)
     switch (e.keyCode) {
+        case 32:
+            restart();
+            return
         case 97:
             playerRed.moveLeft(obstacles);
             return

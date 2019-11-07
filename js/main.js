@@ -26,6 +26,7 @@ const images = {
 window.onload = function() {
     document.getElementById("start-button").onclick = function() {
         document.querySelector('canvas').style.visibility = 'visible';
+        document.querySelector('button').style.display = 'none';
         startGame();
     };
   
@@ -58,6 +59,10 @@ function checkWin(){
         clearInterval(interval);
         win.draw();
     }
+}
+
+function restart(){
+    location.reload();
 }
 
 function update() {

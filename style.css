@@ -7,7 +7,7 @@ body {
     font-size: 16px;
 }
 #container {
-    margin-top: 2%;
+    position: relative;
 }
 h1{
     font-size: 60px;
@@ -18,7 +18,15 @@ h1{
     background-position: 367px 40px;
     background-size: 150px;
 }
+img {
+    width: 20%;
+    display: block;
+    margin: 5% 8%;
+}
 canvas {
+    position: absolute;
+    top: 50px;
+    right: 5%;
     margin-left: 50px;
     display: block;
     border: 5px solid #707070;
@@ -30,7 +38,9 @@ canvas {
 #start-button{
     width: 350px;
     height: 100px;
-    margin-left: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
     font-family: 'Montserrat', sans-serif;
     font-size: 40px;
     color: #707070;
