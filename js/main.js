@@ -4,6 +4,7 @@ let interval;
 let frames  = 0;
 let obstacles = [];
 let deletedGreen = [];
+let deletedRed = [];
 let redObs = [];
 let moves = 0;
 
@@ -65,6 +66,40 @@ function restart(){
     location.reload();
 }
 
+function addDeleted(){
+    if(playerGreen.x !== controlGreen.x) {
+        if(deletedGreen.length > 0) {
+            let arr = deletedGreen.splice(0, 1)
+            obstacles.push(...arr);
+            console.log(arr)
+        }
+    }
+
+    if(playerGreen.y !== controlGreen.y) {
+        if(deletedGreen.length > 0) {
+            let arr = deletedGreen.splice(0, 1)
+            obstacles.push(...arr);
+            console.log(arr)
+        }
+    }
+
+
+    if(playerRed.x !== controlRed.x) {
+        if(deletedRed.length > 0) {
+            let arr = deletedRed.splice(0, 1)
+            obstacles.push(...arr);
+        }
+    }
+
+    if(playerRed.y !== controlRed.y) {
+        if(deletedRed.length > 0) {
+            let arr = deletedRed.splice(0, 1)
+            obstacles.push(...arr);
+        }
+    }
+    
+}
+
 function update() {
     frames++;
     clearCanvas();
@@ -81,6 +116,7 @@ function update() {
     //win.draw()
     score();
     checkWin();
+    addDeleted()
     //win.draw();
     //checkCollitions();
 }

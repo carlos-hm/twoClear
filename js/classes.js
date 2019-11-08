@@ -313,25 +313,20 @@ class Player {
                     deletedGreen.push(...arr);
                 }
             })
-            // deletedGreen.splice(0,1,removed.shift());
-            console.log(deletedGreen);
-        } else {
-            if(deletedGreen.length > 0) {
-                let arr = deletedGreen.splice(0, 1)
-                obstacles.push(...arr);
-                console.log(arr)
-            }
         }
         
         if(this.x === control.x && this.y === control.y && this.color == 'red' && control.color == 'red'){
             obstacles.forEach((element, idx) => {
-                console.log(element.color)
+                //console.log(element.color)
                 if(element.color === 'red'){
-                    obstacles.splice(idx, 1);
-                    console.log('yes');
+                    let arr = obstacles.splice(idx, 1)
+                    deletedRed.push(...arr);
                 }
             })
         }
     }
 }
+
+
+console.log(deletedRed)
 
