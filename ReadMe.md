@@ -42,11 +42,18 @@ Sólo el jugador verde puede pasar sobre el laser verde.
 ##### Hoyo:
 Ningún jugador puede pasar por este tipo de obstáculo.
 
+#### Desactivar obstáculos (laser)
+Para desactivar momentaneamento los obstaculos debes posicionarte arriba de los controles. Pero ten cuidado ya que si sales del control, los lasers volverán a aparecer.
+
+Para desactivar el laser rojo debes mover al personaje verde al control verde.
+
+Para desactivar el lase rojo debes mover al personaje verde al control rojo.
+
 #### Reiniciar juego
 Para reiniciar el juego debes presionar la barra espaciadora.
 
-
-
+## Demo
+https://carlos-hm.github.io/twoClear/
 
 
 
